@@ -28,14 +28,13 @@ students = [
 def students_list():
     return jsonify(students)
 
-@todo.route('/students/get/<int:id>')
-def get_student(id):
-    # Fixing the student search logic
-    student = next((s for s in students if s['id'] == id), None)
-    if student:
-        return jsonify(student)
-    else:
-        return jsonify({"error": "Student not found"}), 404
+@todo.route('/student/get/<int:id>')
+def student_get_by_id(id):
+    for std in students:
+        if std['id'] == id:
+            return jsonify(std)
+
+    return "id not found"
 
 if __name__ == '__main__':
     todo.run(
